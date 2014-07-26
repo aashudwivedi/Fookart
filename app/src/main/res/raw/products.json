@@ -1,0 +1,52 @@
+{
+    "product": [
+	{
+	    id: "1",
+	    name: "Microwave Oven",
+	    price: 9000,
+	    details: "Best microwave oven from samsung",
+	    category: "Electronics",
+	    imageUrl: "http://static.foocart.com/microwave.jpg"
+	},
+	{
+	    id: "2",
+	    name: "Television",
+	    price: 40000,
+	    details: "Fine LED tv from samsung",
+	    category: "Electronics",
+	    imageUrl: "http://static.foocart.com/tv.jpg"
+	},
+	{
+	    id: "3",
+	    name: "Vaccum Cleaner",
+	    price: 5000,
+	    details: "Vaccume cleaner from samsung",
+	    category: "Electronics",
+	    imageUrl: "http://static.foocart.com/vaccum_cleaner.jpg"
+	},
+	{
+        id: "4",
+        name: "Table",
+	    price: 5000,
+	    details: "Study Table",
+	    category: "Furniture",
+	    imageUrl: "http://static.foocart.com/table.jpg"
+	},
+	{
+	    id: "5",
+	    name: "Chair",
+	    price: 10000,
+	    details: "Rotating Chair",
+	    category: "Electronics",
+	    imageUrl: "http://static.foocart.com/chair.jpg"
+	},
+	{
+	    id: "6",
+	    name: "Almirah",
+	    price: 7000,
+	    details: "Almirah from godredge",
+	    category: "Electronics",
+	    imageUrl: "http://static.foocart.com/almirah.jpg"
+	}
+    ]
+}
