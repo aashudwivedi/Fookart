@@ -4,5 +4,8 @@
     <string name="app_name">FooKart</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="cart">cart</string>
+    <string name="no_item_in_cart">You haven\'t added anything in your cart yet.</string>
 
 </resources>

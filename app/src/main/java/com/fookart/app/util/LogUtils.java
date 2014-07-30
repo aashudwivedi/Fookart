@@ -8,7 +8,7 @@ import android.util.Log;
 import com.fookart.app.BuildConfig;
 
 public class LogUtils {
-    private static final String LOG_PREFIX = "moneydroid";
+    private static final String LOG_PREFIX = "fookart";
     private static final int LOG_PREFIX_LENGTH = LOG_PREFIX.length();
     private static final int MAX_LOG_TAG_LENGTH = 23;
 

@@ -10,10 +10,10 @@ import android.net.Uri;
 
 import java.util.Arrays;
 
+import static com.fookart.app.provider.ProductContract.Products;
+import static com.fookart.app.provider.ProductDatabase.Tables;
 import static com.fookart.app.util.LogUtils.LOGV;
 import static com.fookart.app.util.LogUtils.makeLogTag;
-import static com.fookart.app.provider.ProductDatabase.Tables;
-import static com.fookart.app.provider.ProductContract.Products;
 
 /**
  * Created by ashu on 26/7/14.
@@ -48,19 +48,15 @@ public class ProductProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match) {
             case PRODUCTS:
+                PRODUCTS_ID:
                 qb.setTables(Tables.PRODUCTS);
-                break;
-            case PRODUCTS_ID:
-                qb.setTables(Tables.PRODUCTS);
-                //TODO: FIX THIS
-                //qb.query()
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
         final SQLiteDatabase db = mOpenHelper.getReadableDatabase();
-        return qb.query(db, null, null, null, null, null, null);
+        return qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
 
     }
 

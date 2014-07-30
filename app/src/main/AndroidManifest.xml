@@ -17,6 +17,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.ProductDetailActivity"
+                  android:label="Details"/>
+
+        <activity android:name=".ui.CartActivity"
+                  android:label="Cart" />
+
         <provider
                 android:authorities="com.fookart.app.provider"
                 android:name=".provider.ProductProvider"/>
