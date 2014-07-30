@@ -9,9 +9,11 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.fookart.app.R;
+import com.fookart.app.util.CartUtils;
 
 import static com.fookart.app.provider.ProductContract.ProductColumns;
 import static com.fookart.app.provider.ProductContract.Products;
@@ -40,6 +42,7 @@ public class ProductDetailFragment extends Fragment
     private TextView mCategoryText;
     private TextView mPriceText;
     private ImageView mProductImage;
+    private Button mAddToCartButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,15 @@ public class ProductDetailFragment extends Fragment
         mCategoryText = (TextView)root.findViewById(R.id.category);
         mPriceText = (TextView)root.findViewById(R.id.price);
         mProductImage = (ImageView)root.findViewById(R.id.image);
+
+        mAddToCartButton = (Button)root.findViewById(R.id.add_to_cart);
+        final String productId = mProductId;
+        mAddToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartUtils.addtem(getActivity(), productId);
+            }
+        });
 
         getLoaderManager().initLoader(LOADER_ID, null, this);
 

@@ -24,14 +24,15 @@ public class CartUtils {
         for(String productId : cartItems.keySet()) {
             if(productId.equals(id)) {
                 int count = cartItems.get(productId);
-                cartItems.put(productId, count + 1);
+                editor.putInt(id, count + 1);
                 exits = true;
                 break;
             }
         }
         if(!exits) {
-            cartItems.put(id, 1);
+            editor.putInt(id, 1);
         }
+        editor.commit();
     }
 
     public static HashMap<String, Integer> getItems(final Context context) {
