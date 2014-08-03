@@ -1,5 +1,6 @@
 package com.fookart.app.ui;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -11,8 +12,8 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import com.fookart.app.R;
+import com.fookart.app.model.CartModel;
 import com.fookart.app.provider.ProductContract;
-import com.fookart.app.util.CartUtils;
 
 import java.util.Set;
 
@@ -21,10 +22,16 @@ import static com.fookart.app.provider.ProductContract.ProductColumns.*;
 /**
  * Created by ashu on 30/7/14.
  */
+@SuppressLint("NewApi")
 public class CartActivity extends ListActivity
-        implements LoaderManager.LoaderCallbacks<Cursor>{
+        implements LoaderManager.LoaderCallbacks<Cursor>,
+        CartModel.CartCallBack{
 
     public static final int LOADER_ID = 102;
+
+    public boolean mPaused;
+
+    public boolean mOnResumeNeedsLoad = false;
 
     static String [] sProjection = new String []{
             BaseColumns._ID,
@@ -39,6 +46,8 @@ public class CartActivity extends ListActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_layout);
 
+        CartModel.getInstance().setCallback(this);
+
         int[] viewIds = {R.id.product_name};
         mAdapter = new SimpleCursorAdapter(
                 this,
@@ -52,8 +61,23 @@ public class CartActivity extends ListActivity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        mPaused = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPaused = false;
+        if(mOnResumeNeedsLoad) {
+            getLoaderManager().restartLoader(LOADER_ID, null, this);
+        }
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Set<String> ids = CartUtils.getItems(this).keySet();
+        Set<String> ids = CartModel.getInstance().getItems().keySet();
         String selection = PRODUCT_ID + " IN (" + getParamsQuery(ids.size()) + ")";
         CursorLoader loader = new CursorLoader(
                 this,
@@ -74,6 +98,15 @@ public class CartActivity extends ListActivity
             }
         }
         return builder.toString();
+    }
+
+    @Override
+    public void updateCart() {
+        if(mPaused) {
+            mOnResumeNeedsLoad = true;
+        } else {
+            getLoaderManager().restartLoader(LOADER_ID, null, this);
+        }
     }
 
     @Override

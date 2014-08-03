@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.fookart.app.R;
-import com.fookart.app.util.CartUtils;
+import com.fookart.app.model.CartModel;
 
 import static com.fookart.app.provider.ProductContract.ProductColumns;
 import static com.fookart.app.provider.ProductContract.Products;
@@ -66,7 +66,7 @@ public class ProductDetailFragment extends Fragment
         mAddToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartUtils.addtem(getActivity(), productId);
+                CartModel.getInstance().addtem( productId);
             }
         });
 
@@ -90,14 +90,14 @@ public class ProductDetailFragment extends Fragment
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // this cursor is supposed to have have just one row
+        data.moveToFirst();
+
         int nameIdx = data.getColumnIndexOrThrow(ProductColumns.NAME);
         int detailidx = data.getColumnIndexOrThrow(ProductColumns.DETAILS);
         int categoryIdx = data.getColumnIndexOrThrow(ProductColumns.CATEGORY);
         int imageIdx = data.getColumnIndexOrThrow(ProductColumns.CATEGORY);
         int priceIdx = data.getColumnIndexOrThrow(ProductColumns.PRICE);
 
-        String count = String.valueOf(data.getCount());
-        data.moveToNext();
         String name = data.getString(nameIdx);
         String details = data.getString(detailidx);
         String category = data.getString(categoryIdx);

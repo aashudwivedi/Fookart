@@ -7,9 +7,6 @@ import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import com.fookart.app.R;
 import com.fookart.app.io.JSONHandler;
 import com.fookart.app.io.ProductsHandler;
@@ -22,7 +19,7 @@ import static com.fookart.app.provider.ProductContract.CONTENT_AUTHOURTY;
 import static com.fookart.app.ui.ProductDetailFragment.PRODUCT_ID;
 
 
-public class ProductListActivity extends FragmentActivity
+public class ProductListActivity extends BaseActivity
         implements ProductListFragment.Callbacks{
     private boolean mTWoPaneMode = false;
 
@@ -34,31 +31,7 @@ public class ProductListActivity extends FragmentActivity
         if(findViewById(R.id.details) != null) {
             mTWoPaneMode = true;
         }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if(id == R.id.action_cart) {
-            startActivity(new Intent(this, CartActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        addInitialData();
     }
 
     /**
