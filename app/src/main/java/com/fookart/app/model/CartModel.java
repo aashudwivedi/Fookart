@@ -61,10 +61,24 @@ public class CartModel {
         requestUIUpdate();
     }
 
+    public void removeItem(String id) {
+        SharedPreferences pref = mApp.getSharedPreferences(PREF_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(id);
+        requestUIUpdate();
+    }
+
     public HashMap<String, Integer> getItems() {
         SharedPreferences pref = mApp.getSharedPreferences(PREF_NAME,
                 Context.MODE_PRIVATE);
         return (HashMap<String, Integer>) pref.getAll();
+    }
+
+    public int getCountForId(String id) {
+        SharedPreferences pref = mApp.getSharedPreferences(PREF_NAME,
+                Context.MODE_PRIVATE);
+        return pref.getInt(id, -1);
     }
 
     public int getItemCount() {

@@ -8,9 +8,9 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 import com.fookart.app.R;
 import com.fookart.app.model.CartModel;
 import com.fookart.app.provider.ProductContract;
@@ -34,12 +34,13 @@ public class CartActivity extends ListActivity
     public boolean mOnResumeNeedsLoad = false;
 
     static String [] sProjection = new String []{
-            BaseColumns._ID,
             NAME,
             PRICE,
+            PRODUCT_ID,
+            BaseColumns._ID,
     };
 
-    public CursorAdapter mAdapter;
+    public SimpleCursorAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +49,33 @@ public class CartActivity extends ListActivity
 
         CartModel.getInstance().setCallback(this);
 
-        int[] viewIds = {R.id.product_name};
+        int[] viewIds = {R.id.product_name, R.id.price, R.id.count};
         mAdapter = new SimpleCursorAdapter(
                 this,
-                R.layout.list_item,
+                R.layout.cart_list_item,
                 null,
                 sProjection,
                 viewIds,
                 0);
+
+        mAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if(columnIndex == 2) {
+                    int idx = cursor.getColumnIndex(PRODUCT_ID);
+                    String id = cursor.getString(idx);
+                    int count = CartModel.getInstance().getCountForId(id);
+                    ((TextView)(view)).setText(String.valueOf(count));
+                    return true;
+                }
+                return false;
+            }
+        });
+
         getLoaderManager().initLoader(LOADER_ID, null, this);
         setListAdapter(mAdapter);
+
+
     }
 
     @Override
@@ -112,7 +130,6 @@ public class CartActivity extends ListActivity
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         String text = "count = " + String.valueOf(data.getCount());
-        Toast.makeText(getApplicationContext(), text, 100).show();
         mAdapter.swapCursor(data);
     }
 

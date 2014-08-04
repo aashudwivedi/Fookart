@@ -34,15 +34,15 @@ public class ProductListFragment extends ListFragment
     public WeakReference<Callbacks> mCallback;
 
     static String [] sProjection = new String []{
-            BaseColumns._ID,
             ProductColumns.NAME,
-            ProductColumns.IMAGE_URL};
+            ProductColumns.PRICE,
+            BaseColumns._ID,};
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        int[] viewIds = {R.id.product_name};
+        int[] viewIds = {R.id.product_name, R.id.price};
         mAdapter = new SimpleCursorAdapter(
                 getActivity(),
                 R.layout.list_item,
@@ -51,13 +51,6 @@ public class ProductListFragment extends ListFragment
                 viewIds,
                 0);
 
-       /* mAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
-            @Override
-            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-                TextView productName = (TextView)view.findViewById(R.id.product_name);
-
-            }
-        });*/
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(LOADER_ID, null, this);
 

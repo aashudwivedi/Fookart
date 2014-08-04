@@ -7,5 +7,11 @@
     <string name="add_to_cart">Add to cart</string>
     <string name="cart">cart</string>
     <string name="no_item_in_cart">You haven\'t added anything in your cart yet.</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="count">Count</string>
+    <string name="details">Details</string>
+    <string name="category">Category</string>
+    <string name="product_added">Product Added</string>
 
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -8,27 +8,69 @@
     <Button
             android:id="@+id/add_to_cart"
             android:text="@string/add_to_cart"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/name_label"
+            android:layout_below="@+id/add_to_cart"
+            android:text="@string/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     <TextView
             android:id="@+id/name"
+            android:layout_alignBaseline="@id/name_label"
+            android:layout_toEndOf="@id/name_label"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/label_details"
+            android:layout_below="@id/name_label"
+            android:text="@string/details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     <TextView
             android:id="@+id/details"
+            android:layout_alignBaseline="@id/label_details"
+            android:layout_toEndOf="@id/label_details"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/label_category"
+            android:layout_below="@id/label_details"
+            android:text="@string/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     <TextView
             android:id="@+id/category"
+            android:layout_alignBaseline="@id/label_category"
+            android:layout_toEndOf="@id/label_category"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/label_price"
+            android:text="@string/price"
+            android:layout_below="@id/label_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     <TextView
             android:id="@+id/price"
+            android:layout_alignBaseline="@id/label_price"
+            android:layout_toEndOf="@id/label_price"
+            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-</LinearLayout>
+
+</RelativeLayout>

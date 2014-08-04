@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.fookart.app.R;
 import com.fookart.app.model.CartModel;
 
@@ -67,6 +68,9 @@ public class ProductDetailFragment extends Fragment
             @Override
             public void onClick(View v) {
                 CartModel.getInstance().addtem( productId);
+                Toast.makeText(getActivity(),
+                        getResources().getText(R.string.product_added),
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
